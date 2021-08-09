@@ -15,7 +15,6 @@ router.get('/', async (req, res) => {
 // @desc create an item
 // @access Public
 router.post('/', async (req, res) => {
-    console.log(req.body);
     const newItem = new Item({ name: req.body.name });
     await newItem.save();
     res.send(newItem);
