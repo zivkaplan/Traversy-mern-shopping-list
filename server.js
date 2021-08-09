@@ -6,6 +6,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const itemsRoute = require('./routes/api/items');
+const usersRoute = require('./routes/api/users');
+const authRoute = require('./routes/api/auth');
 const port = process.env.PORT || 5000;
 const app = express();
 const dbUrl =
@@ -51,6 +53,8 @@ const mongooseConfig = (function () {
 
 // routes
 app.use('/api/items', itemsRoute);
+app.use('/api/users', usersRoute);
+app.use('/api/auth', authRoute);
 
 // serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
