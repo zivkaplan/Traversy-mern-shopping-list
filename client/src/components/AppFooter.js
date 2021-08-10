@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Navbar, Container, NavbarText } from 'reactstrap';
 
 class AppFooter extends React.Component {
