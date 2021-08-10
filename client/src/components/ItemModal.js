@@ -11,6 +11,7 @@ import {
     Label,
     Input,
 } from 'reactstrap';
+import PropTypes from 'prop-types';
 
 class ItemModal extends React.Component {
     constructor(props) {
@@ -23,7 +24,9 @@ class ItemModal extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
-
+    static propTypes = {
+        isAuthenticated: PropTypes.bool,
+    };
     toggle() {
         this.setState({ modal: !this.state.modal });
     }
@@ -38,13 +41,17 @@ class ItemModal extends React.Component {
     render() {
         return (
             <div>
-                <Button
-                    color="dark"
-                    style={{ marginBottom: '2rem' }}
-                    onClick={this.toggle}
-                >
-                    Add Item
-                </Button>
+                {this.props.isAuthenticated ? (
+                    <Button
+                        color="dark"
+                        style={{ marginBottom: '2rem' }}
+                        onClick={this.toggle}
+                    >
+                        Add Item
+                    </Button>
+                ) : (
+                    <h4 className="mb-3 ml-4">Log in to manage items</h4>
+                )}
                 <Modal isOpen={this.state.modal} toggle={this.state.toggle}>
                     <ModalHeader toggle={this.toggle}>Add To Cart</ModalHeader>
                     <ModalBody>
@@ -72,5 +79,8 @@ class ItemModal extends React.Component {
         );
     }
 }
-const mapStateToProps = (state) => ({ item: state.item });
+const mapStateToProps = (state) => ({
+    item: state.item,
+    isAuthenticated: state.auth.isAuthenticated,
+});
 export default connect(mapStateToProps, { addItem })(ItemModal);

@@ -11,6 +11,13 @@ class ShoppingList extends React.Component {
         this.handleAdd = this.handleAdd.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
     }
+
+    static propTypes = {
+        getItems: PropTypes.func.isRequired,
+        item: PropTypes.object.isRequired,
+        isAuthenticated: PropTypes.bool,
+    };
+
     componentDidMount() {
         this.props.getItems();
     }
@@ -31,15 +38,17 @@ class ShoppingList extends React.Component {
             return (
                 <CSSTransition key={_id} timeout={500} classNames="fade">
                     <ListGroupItem>
-                        <Button
-                            id={_id}
-                            className="remove-btn"
-                            color="danger"
-                            size="sm"
-                            onClick={this.handleRemove}
-                        >
-                            &times;
-                        </Button>
+                        {this.props.isAuthenticated ? (
+                            <Button
+                                id={_id}
+                                className="remove-btn"
+                                color="danger"
+                                size="sm"
+                                onClick={this.handleRemove}
+                            >
+                                &times;
+                            </Button>
+                        ) : null}
                         {name}
                     </ListGroupItem>
                 </CSSTransition>
@@ -60,13 +69,9 @@ class ShoppingList extends React.Component {
     }
 }
 
-ShoppingList.propTypes = {
-    getItems: PropTypes.func.isRequired,
-    item: PropTypes.object.isRequired,
-};
-
 const mapStateToProps = (state) => ({
     item: state.item,
+    isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, { getItems, deleteItem })(ShoppingList);
