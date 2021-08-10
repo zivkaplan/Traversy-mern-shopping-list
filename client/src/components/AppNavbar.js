@@ -9,6 +9,8 @@ import {
     NavLink,
     Container,
 } from 'reactstrap';
+import RegisterModal from './auth/RegisterModal';
+import Logout from './auth/Logout';
 
 export default class AppNavbar extends React.Component {
     constructor(props) {
@@ -30,8 +32,14 @@ export default class AppNavbar extends React.Component {
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ms-auto" navbar>
                                 <NavItem>
-                                    <NavLink href="https://github.com/zivkaplan">
-                                        Github
+                                    <RegisterModal />
+                                </NavItem>
+                                <NavItem>
+                                    <Logout />
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink href="https://github.com/zivkaplan/Traversy-mern-shopping-list">
+                                        Github Repo
                                     </NavLink>
                                 </NavItem>
                             </Nav>

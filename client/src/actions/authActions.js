@@ -27,7 +27,7 @@ export const loadUser = () => async (dispatch, getState) => {
         const token = getState().auth.token;
         if (token) config.headers['x-auth-token'] = token;
 
-        const response = await axios.get('api/auth/user', config);
+        const response = await axios.get('/api/auth/user', config);
         dispatch({
             type: USER_LOADED,
             payload: response.data,
@@ -38,4 +38,39 @@ export const loadUser = () => async (dispatch, getState) => {
             type: AUTH_ERROR,
         });
     }
+};
+
+//register user
+export const register =
+    ({ name, email, password }) =>
+    async (dispatch) => {
+        try {
+            const response = await axios({
+                method: 'post',
+                url: '/api/users',
+                headers: { 'Content-Type': 'application/json' },
+                data: JSON.stringify({ name, email, password }),
+            });
+            dispatch({
+                type: REGISTER_SUCCESS,
+                payload: response.data,
+            });
+        } catch (e) {
+            dispatch(
+                returnErrors(
+                    e.response.data,
+                    e.response.status,
+                    'REGISTER_FAIL'
+                )
+            );
+            dispatch({
+                type: REGISTER_FAIL,
+            });
+        }
+    };
+
+export const logout = () => {
+    return {
+        type: LOGOUT_SUCCESS,
+    };
 };
