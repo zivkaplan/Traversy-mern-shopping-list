@@ -4,6 +4,7 @@ import React from 'react';
 import store from './store';
 import { Provider } from 'react-redux';
 import AppNavbar from './components/AppNavbar';
+import AppFooter from './components/AppFooter';
 import ShoppingList from './components/ShoppingList';
 import ItemModal from './components/ItemModal';
 import { Container } from 'reactstrap';
@@ -22,6 +23,7 @@ class App extends React.Component {
                         <ItemModal />
                         <ShoppingList />
                     </Container>
+                    <AppFooter />
                 </div>
             </Provider>
         );
