@@ -7,6 +7,7 @@
 An exercise from [Brad Traversy YouTube channel](https://www.youtube.com/watch?v=PBTYxXADG_k&list=PLillGF-RfqbbiTGgA77tGO426V3hRF9iE)
 
 -   📱 responsive
+-   👢 reactstrap & react-transition-group
 -   🧂 bcrypt for authentication
 -   📁 Redux for state managament
 
